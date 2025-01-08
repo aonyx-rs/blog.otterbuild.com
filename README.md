@@ -44,9 +44,6 @@ for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
 
 [blog.otterbuild.com]: https://blog.otterbuild.com
-
 [earthly]: https://earthly.dev
-
 [pre-commit]: https://pre-commit.com
-
 [rust]: https://www.rust-lang.org
