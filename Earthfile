@@ -57,6 +57,9 @@ markdown-lint:
     RUN markdownlint **/*.md
 
 rust-container:
+    # Install system-level dependencies
+    RUN apt update && apt upgrade -y && apt install -y libssl-dev pkg-config
+
     # Install clippy and rustfmt
     RUN rustup component add clippy rustfmt
 
@@ -66,11 +69,11 @@ rust-container:
     # Install cargo-leptosfmt
     DO rust+CARGO --args="install leptosfmt"
 
+    # Explicitly cache the container at this point
+    SAVE IMAGE --cache-hint
+
 rust-tarpaulin-container:
     FROM +rust-container
-
-    # Install system-level dependencies
-    RUN apt update && apt upgrade -y && apt install -y curl libssl-dev pkg-config
 
     # Install cargo-tarpaulin
     RUN cargo install cargo-tarpaulin
@@ -107,6 +110,28 @@ rust-lint:
 
     # Check the code for linting errors
     DO rust+CARGO --args="clippy --all-targets --all-features --locked -- -D warnings"
+
+rust-publish:
+    ARG EXPORT_SITE=""
+
+    FROM +rust-container
+
+    # Install the WASM target
+    RUN rustup target add wasm32-unknown-unknown
+
+    # Install trunk to compile the Leptos app
+    DO rust+CARGO --args="install trunk"
+
+    # Copy the source code in a cache-friendly way
+    DO +COPY_RUST_SOURCES
+
+    # Compile the Leptos app
+    RUN cd crates/web && trunk build --release
+
+    # Optionally export the compiled app
+    IF [ "$EXPORT_SITE" != "" ]
+        SAVE ARTIFACT crates/web/dist AS LOCAL crates/web/dist
+    END
 
 rust-test:
     # Optionally save the report to the local filesystem

@@ -1,3 +1,6 @@
+# Compiled Leptos web app
+dist/
+
 # Cache for Prettier 4
 .prettiercache
 
