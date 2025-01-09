@@ -52,7 +52,7 @@ jobs:
         run: earthly --push --remote-cache=ghcr.io/otterbuild/blog-earthly-cache:rust-publish --strict +rust-publish --EXPORT_SITE=true
 
       - name: Set up GitHub Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
