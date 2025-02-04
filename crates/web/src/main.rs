@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use crate::app::App;
 
 mod app;
+mod components;
 
 fn main() {
     // Set up logging

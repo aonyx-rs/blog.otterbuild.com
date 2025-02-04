@@ -10,4 +10,4 @@ console_log = "1.0.0"
 leptos = { version = "0.7.3", features = ["csr"] }
 leptos_meta = "0.7.3"
 log = "0.4.22"
-tailwind_fuse = "0.3.2"
+tailwind_fuse = { version = "0.3.2", features = ["variant"] }
