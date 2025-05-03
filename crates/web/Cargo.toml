@@ -8,6 +8,6 @@ edition.workspace = true
 console_error_panic_hook = "0.1.7"
 console_log = "1.0.0"
 leptos = { version = "0.8.0", features = ["csr"] }
-leptos_meta = "0.7.3"
+leptos_meta = "0.8.0"
 log = "0.4.22"
 tailwind_fuse = { version = "0.3.2", features = ["variant"] }
